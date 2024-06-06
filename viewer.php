@@ -23,8 +23,6 @@
             })
         })
 
-        tmp = tmp.filter((doc) => doc.data.room === roomID)
-
         tmp = tmp.sort((a, b) => {
             const a_sec = a.data.created.seconds
             const b_sec = b.data.created.seconds
@@ -89,10 +87,10 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const msgCollection = collection(db, 'message');
+    const msgCollection = collection(db, 'data', 'message', roomID);
     const querySnapshot = await getDocs(msgCollection);
 
-    render(querySnapshot, userID, roomID);
+    render(querySnapshot, userID);
 
     const btn = document.getElementById("send_btn");
     const message = document.getElementById("message");
@@ -112,7 +110,7 @@
     });
 
     const unsubscribe = onSnapshot(msgCollection, (snapshot) => {
-        render(snapshot, userID, roomID);
+        render(snapshot, userID);
     });
 </script>
 
