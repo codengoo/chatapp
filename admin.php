@@ -36,8 +36,6 @@
             }
         })
 
-        // console.log(tmp);
-
         const box = document.getElementById('chat_box');
         box.innerHTML = '';
 
@@ -49,11 +47,12 @@
             if (messageContent === '<calling>') {
                 console.log(messageContent, userIDinDoc, userID);
                 if (userID !== userIDinDoc) {
-                    content.innerHTML = userIDinDoc + 'is calling you';
+                    content.innerHTML = userIDinDoc + ' is calling you';
                     const btnJoin = document.createElement('a');
                     btnJoin.innerText = 'Join';
                     btnJoin.classList.add('btn_join')
                     btnJoin.href = doc.data.link
+                    btnJoin.target = '_blank';
                     content.appendChild(btnJoin);
                 } else {
                     content.innerHTML = 'you are calling everyone';
@@ -113,18 +112,18 @@
 
     const btn = document.getElementById("send_btn");
     const btn_call = document.getElementById("call_action");
-    const message = document.getElementById("message");
+    const messageInp = document.getElementById("message");
 
     btn.addEventListener("click", function() {
-        if (message.value.trim() === '') {
+        if (messageInp.value.trim() === '') {
             alert("Phải có nội dung trước khi gửi")
         } else {
             addDoc(msgCollection, {
-                message: message.value,
+                message: messageInp.value,
                 user: userID,
                 created: Timestamp.now(),
             });
-            message.value = '';
+            messageInp.value = '';
         }
     });
 
@@ -137,6 +136,11 @@
         });
     })
 
+    messageInp.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            btn.click()
+        }
+    })
 
     const unsubscribe = onSnapshot(msgCollection, (snapshot) => {
         render(snapshot, userID);
@@ -177,6 +181,12 @@
 </script>
 
 <style>
+    .btn_join {
+        background-color: greenyellow;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
     .block {
         padding: 10px;
         border-radius: 10px;

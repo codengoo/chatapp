@@ -5,6 +5,13 @@
     <title>Meet - Join Room</title>
 </head>
 
+
+<script>
+    function addLinkChat(roomID, userID) {
+        const room = document.getElementById("roomID");
+        room.value = roomID;
+    }
+</script>
 <script>
     function getParameterByName(name, url = window.location.href) {
         name = name.replace(/[\\[\\]]/g, '\\\\$&');
@@ -49,13 +56,13 @@
             const content = document.createElement('div');
 
             if (messageContent === '<calling>') {
-                console.log(messageContent, userIDinDoc, userID);
                 if (userID !== userIDinDoc) {
-                    content.innerHTML = userIDinDoc + 'is calling you ';
+                    content.innerHTML = userIDinDoc + ' is calling you ';
                     const btnJoin = document.createElement('a');
                     btnJoin.innerText = 'Join';
                     btnJoin.classList.add('btn_join')
-                    btnJoin.href = doc.data.link
+                    btnJoin.href = doc.data.link;
+                    btnJoin.target = '_blank';
                     content.appendChild(btnJoin);
                 } else {
                     content.innerHTML = 'you are calling everyone';
@@ -99,7 +106,7 @@
         alert("Sai đường dẫn");
         window.location.href = 'https://www.google.com.vn/?hl=vi'
     }
-
+    addLinkChat(roomID, userID);
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const msgCollection = collection(db, 'data', 'message', roomID);
@@ -108,21 +115,37 @@
     render(querySnapshot, userID);
 
     const btn = document.getElementById("send_btn");
-    const message = document.getElementById("message");
+    const messageInp = document.getElementById("message");
+    const btn_call = document.getElementById("call_action");
+
+    btn_call.addEventListener("submit", function() {
+        addDoc(msgCollection, {
+            message: '<calling>',
+            user: userID,
+            created: Timestamp.now(),
+            link: window.location.origin + '/call.php?room=' + roomID
+        });
+    })
 
     btn.addEventListener("click", function() {
-        if (message.value.trim() === '') {
+        if (messageInp.value.trim() === '') {
             alert("Phải có nội dung trước khi gửi")
         } else {
             addDoc(msgCollection, {
-                message: message.value,
+                message: messageInp.value,
                 user: userID,
                 created: Timestamp.now(),
                 room: roomID
             });
-            message.value = '';
+            messageInp.value = '';
         }
     });
+
+    messageInp.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            btn.click()
+        }
+    })
 
     const unsubscribe = onSnapshot(msgCollection, (snapshot) => {
         render(snapshot, userID);
@@ -139,6 +162,10 @@
         <div style="display: flex; width: 100%">
             <input type="text" id="message" name="message" placeholder="MeetingRoom">
             <button class="btn" id="send_btn">Send</button>
+            <form action="handle.php" method="post" class="form" target="_blank" id="call_action">
+                <input type="submit" value="Call" class="btn">
+                <input type="hidden" name="roomID" id="roomID">
+            </form>
         </div>
     </div>
 </body>
