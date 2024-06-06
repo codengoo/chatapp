@@ -44,12 +44,27 @@
         box.innerHTML = '';
 
         tmp.forEach(doc => {
+            const messageContent = doc.data.message;
             const userIDinDoc = doc.data.user
             const content = document.createElement('div');
 
-            content.innerHTML = doc.data.message;
-            content.classList.add('block', userID === userIDinDoc ? 'my' : 'your')
+            if (messageContent === '<calling>') {
+                console.log(messageContent, userIDinDoc, userID);
+                if (userID !== userIDinDoc) {
+                    content.innerHTML = userIDinDoc + 'is calling you ';
+                    const btnJoin = document.createElement('a');
+                    btnJoin.innerText = 'Join';
+                    btnJoin.classList.add('btn_join')
+                    btnJoin.href = doc.data.link
+                    content.appendChild(btnJoin);
+                } else {
+                    content.innerHTML = 'you are calling everyone';
+                }
+            } else {
+                content.innerHTML = messageContent;
+            }
 
+            content.classList.add('block', userID === userIDinDoc ? 'my' : 'your')
             box.appendChild(content)
         })
     }
@@ -129,6 +144,12 @@
 </body>
 
 <style>
+    .btn_join {
+        background-color: greenyellow;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
     .block {
         padding: 10px;
         border-radius: 10px;

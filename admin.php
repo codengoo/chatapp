@@ -42,19 +42,37 @@
         box.innerHTML = '';
 
         tmp.forEach(doc => {
+            const messageContent = doc.data.message;
             const userIDinDoc = doc.data.user
             const content = document.createElement('div');
 
-            content.innerHTML = doc.data.message;
-            content.classList.add('block', userID === userIDinDoc ? 'my' : 'your')
+            if (messageContent === '<calling>') {
+                console.log(messageContent, userIDinDoc, userID);
+                if (userID !== userIDinDoc) {
+                    content.innerHTML = userIDinDoc + 'is calling you';
+                    const btnJoin = document.createElement('a');
+                    btnJoin.innerText = 'Join';
+                    btnJoin.classList.add('btn_join')
+                    btnJoin.href = doc.data.link
+                    content.appendChild(btnJoin);
+                } else {
+                    content.innerHTML = 'you are calling everyone';
+                }
+            } else {
+                content.innerHTML = messageContent;
+            }
 
+            content.classList.add('block', userID === userIDinDoc ? 'my' : 'your')
             box.appendChild(content)
         })
     }
 
     function addLinkChat(roomID, userID) {
         const link = document.getElementById("link_chat")
+        const room = document.getElementById("roomID");
         link.value = window.location.origin + `/viewer.php?userID=${userID}&room=${roomID}`;
+        room.value = roomID;
+
     }
 </script>
 
@@ -94,6 +112,7 @@
     render(querySnapshot, userID);
 
     const btn = document.getElementById("send_btn");
+    const btn_call = document.getElementById("call_action");
     const message = document.getElementById("message");
 
     btn.addEventListener("click", function() {
@@ -108,6 +127,16 @@
             message.value = '';
         }
     });
+
+    btn_call.addEventListener("submit", function() {
+        addDoc(msgCollection, {
+            message: '<calling>',
+            user: userID,
+            created: Timestamp.now(),
+            link: window.location.origin + '/call.php?room=' + roomID
+        });
+    })
+
 
     const unsubscribe = onSnapshot(msgCollection, (snapshot) => {
         render(snapshot, userID);
@@ -128,8 +157,9 @@
         <div style="display: flex; width: 100%">
             <input type="text" id="message" name="message" placeholder="MeetingRoom">
             <button class="btn" id="send_btn">Send</button>
-            <form action="handle.php" method="post" class="form" target="_blank">
+            <form action="handle.php" method="post" class="form" target="_blank" id="call_action">
                 <input type="submit" value="Call" class="btn">
+                <input type="hidden" name="roomID" id="roomID">
             </form>
         </div>
     </div>

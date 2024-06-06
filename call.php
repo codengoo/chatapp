@@ -24,7 +24,10 @@
                         ?>`,
                 width: '100%',
                 height: '100%',
-                parentNode: document.querySelector('#calling-container')
+                parentNode: document.querySelector('#calling-container'),
+                configOverwrite: {
+                    prejoinPageEnabled: false
+                },
             };
             const api = new JitsiMeetExternalAPI(domain, options);
         });
