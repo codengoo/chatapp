@@ -1,15 +1,94 @@
-*{
-    padding: 0;
-    margin: 0;
+* {
+  padding: 0;
+  margin: 0;
 }
 
-#calling-container{
-    width: 100vw;
-    height: 100vh;
+#calling-container {
+  width: 100vw;
+  height: 100vh;
 }
 
 html {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.btn_join {
+  background-color: greenyellow;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.block {
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.your {
+  background-color: white;
+  text-align: left;
+}
+
+.my {
+  background-color: black;
+  text-align: right;
+  color: white;
+}
+
+html > body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: black;
+}
+
+.title {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  height: 30px;
+  font-weight: bold;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.chat-bottom {
+  display: flex;
+  flex-direction: "row";
+  gap: 10px;
+}
+
+.chat {
+  height: 50vh;
+  width: 400px;
+  background-color: #d9d9d9;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#message {
+  width: 100%;
 }
