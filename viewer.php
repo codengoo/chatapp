@@ -99,8 +99,11 @@
         appId: "1:120584822548:web:14c6074a34cf8b89116c01"
     };
 
-    const userID = getParameterByName('userID');
-    const roomID = getParameterByName('room');
+    // const userID = getParameterByName('userID');
+    // const roomID = getParameterByName('room');
+
+    const userID = "6664293a52b77";
+    const roomID = "6664293a52b78"
 
     if (!userID || !roomID) {
         alert("Sai đường dẫn");

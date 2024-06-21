@@ -69,7 +69,7 @@
     function addLinkChat(roomID, userID) {
         const link = document.getElementById("link_chat")
         const room = document.getElementById("roomID");
-        link.value = window.location.origin + `/viewer.php?userID=${userID}&room=${roomID}`;
+        link.value = window.location.origin + `/viewer.php`;
         room.value = roomID;
 
     }
@@ -97,9 +97,14 @@
         appId: "1:120584822548:web:14c6074a34cf8b89116c01"
     };
 
-    const userID = <?php echo "'" . uniqid() . "'"; ?>;
-    const clientID = <?php echo "'" . uniqid() . "'"; ?>;
-    const roomID = <?php echo "'" . uniqid() . "'"; ?>;
+
+
+    // const userID = <?php echo "'" . uniqid() . "'"; ?>;
+    // const clientID = <?php echo "'" . uniqid() . "'"; ?>;
+    // const roomID = <?php echo "'" . uniqid() . "'"; ?>;
+    const userID = '6664293a52b76';
+    const clientID = "6664293a52b77";
+    const roomID = "6664293a52b78"
 
     addLinkChat(roomID, clientID)
 
