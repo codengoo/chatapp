@@ -1,94 +1,14 @@
-* {
-  padding: 0;
-  margin: 0;
+.ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
 }
 
-#calling-container {
-  width: 100vw;
-  height: 100vh;
-}
-
-html {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.btn_join {
-  background-color: greenyellow;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.block {
-  padding: 10px;
-  border-radius: 10px;
-  margin: 10px;
-}
-
-.your {
-  background-color: white;
-  text-align: left;
-}
-
-.my {
-  background-color: black;
-  text-align: right;
-  color: white;
-}
-
-html > body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.container {
-  background-color: aliceblue;
-  padding: 20px;
-  border-radius: 10px;
-  border-width: 2px;
-  border-color: black;
-}
-
-.title {
-  text-align: center;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.btn {
-  height: 30px;
-  font-weight: bold;
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 50px;
-}
-
-.chat-bottom {
-  display: flex;
-  flex-direction: "row";
-  gap: 10px;
-}
-
-.chat {
-  height: 50vh;
-  width: 400px;
-  background-color: #d9d9d9;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-#message {
-  width: 100%;
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }

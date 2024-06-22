@@ -1,34 +1,48 @@
-export function render(msgList, userID) {
-    // console.log(data);
-    const chat_box = document.getElementById('chat_box');
-    chat_box.innerHTML = '';
+var IS_FIRST_LOAD = true;
 
-    msgList.forEach(msg => {
-        const message = msg.data.message;
-        const messageUser = msg.data.user;
-        const content = document.createElement('div');
+export function render(el, msgList, userID) {
+    console.log(msgList);
 
-        if (message === '<calling>') {
-            if (userID !== messageUser) {
-                const btnJoin = document.createElement('a');
+    if (IS_FIRST_LOAD) {
+        msgList.forEach(msg => buildContent(el, msg, userID));
+        IS_FIRST_LOAD = false;
+    } else if (msgList.length > 0) {
+        buildContent(el, msgList[msgList.length - 1], userID);
+    }
+}
 
-                content.innerHTML = userIDinDoc + ' is calling you';
-                btnJoin.innerText = 'Join';
-                btnJoin.classList.add('btn_join')
-                btnJoin.href = doc.data.link
-                btnJoin.target = '_blank';
+export function buildContent(el, msg, userID) {
+    const content = document.createElement('div');
+    const message = msg.data.message;
+    const messageUser = msg.data.user;
 
-                content.appendChild(btnJoin);
-            } else {
-                content.innerHTML = 'you are calling everyone';
-            }
-        } else {
-            content.innerHTML = message;
-        }
+    content.innerHTML = userID === messageUser
+        ? renderMyMessage(1, message)
+        : renderYourMessage(1, message);
 
-        content.classList.add('block', userID === messageUser ? 'my' : 'your')
-        chat_box.appendChild(content)
-    })
+    el.appendChild(content)
+}
+
+export function renderMyMessage(time, message) {
+    return (
+        `<div class="d-flex justify-content-end">
+            <div class="bg-primary d-flex justify-content-between w-75 text-white text-right gap-2 ">
+                <p class="m-0 text-small bg-dark p-2">10:33 2/9/24</p>
+                <p class="m-0 p-2">${message}</p>
+            </div>
+        </div>`
+    )
+}
+
+export function renderYourMessage(time, message) {
+    return (
+        `<div class="d-flex justify-content-start">
+            <div class="bg-dark d-flex justify-content-between w-75 text-white text-right gap-2 ">
+                <p class="m-0 text-small bg-primary p-2">10:33 2/9/24</p>
+                <p class="m-0 p-2">${message}</p>
+            </div>
+        </div>`
+    )
 }
 
 export function getParameterByName(name, url = window.location.href) {

@@ -2,34 +2,67 @@
 <html>
 
 <head>
-    <title>Room chat</title>
+    <title>Simple Chat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="title">Chat</h1>
+    <div class="container bg-light p-2 vh-100 d-flex flex-column ">
+        <h1 class="text-white bg-primary text-center p-3">Chat</h1>
 
-        <div class="chat" id="chat_box">
-        </div>
+        <div class="row flex-1 flex-grow-1 overflow-hidden">
+            <div class="col d-flex flex-column h-100">
+                <div class="bg-gray mb-3 border border-2 border-dark flex-grow-1  p-3 d-flex flex-column gap-3 position-relative overflow-scroll" id="box_msg">
+                    <div class="d-flex bg-dark text-white w-100 p-2 justify-content-between position-sticky top-0 left-0 ps-3">
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <div class="ping bg-success"></div>
+                            <p class="m-0 p-2">People đang gọi</p>
+                        </div>
+                        <div class="d-flex flex-row gap-2 align-items-center">
+                            <button class="btn btn-primary">
+                                <img src="./assets/images/call.svg" />
+                            </button>
+                            <button class="btn btn-danger">
+                                <img src="./assets/images/close.svg" />
+                            </button>
+                        </div>
+                    </div>
 
-        <div style="display: flex; width: 100%">
-            <input type="text" id="message" name="message" placeholder="MeetingRoom">
-            <button class="btn" id="send_btn">Send</button>
-            <form action="handle.php" method="post" class="form" target="_blank" id="call_action">
-                <input type="submit" value="Call" class="btn">
-                <input type="hidden" name="roomID" id="roomID">
-            </form>
+
+                </div>
+
+                <form class="form-group mb-2" onsubmit="return false;">
+                    <div class="d-flex gap-3">
+                        <input type="text" class="form-control" id="inp_msg" placeholder="Viết tin nhắn ở đây">
+                        <button id="btn_send" class="btn btn-primary" type="button">
+                            <img src="./assets/images/send.svg" />
+                        </button>
+                        <button id="btn_show" class="btn btn-warning" type="button">
+                            <img src="./assets/images/show.svg" />
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col d-flex flex-column">
+                <div class="bg-secondary flex-grow-1 mb-3"></div>
+
+                <form class="form-group mb-2 d-flex gap-3 justify-content-end">
+                    <button id="btn_copy" class="btn btn-success" type="button" title="Gọi thoại">
+                        <img src="./assets/images/call.svg" />
+                    </button>
+                    <button id="btn_copy" class="btn btn-success" type="button" title="Gọi video">
+                        <img src="./assets/images/video.svg" />
+                    </button>
+                    <button id="btn_copy" class="btn btn-danger" type="button" title="Kết thúc" disabled>
+                        <img src="./assets/images/close.svg" />
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
-
-<script>
-    function addLinkChat(roomID, userID) {
-        const room = document.getElementById("roomID");
-        room.value = roomID;
-    }
-</script>
+<script src="./assets/js/ui.js"></script>
 
 <script type="module">
     import {
@@ -49,29 +82,21 @@
     }
 
     const chat = new Chat(roomID)
-    const btn_send = document.getElementById("send_btn");
-    const btn_call = document.getElementById("call_action");
-    const msg_inp = document.getElementById("message");
+    const btn_send = document.getElementById("btn_send");
+    const inp_msg = document.getElementById("inp_msg");
+    const box_msg = document.getElementById("box_msg");
 
-    addLinkChat(roomID, userID);
-
-    btn_call.addEventListener("submit", function() {
-        chat.addMessage('<calling>', userID);
-    })
-
-    btn_send.addEventListener("click", function() {
-        chat.addMessage(msg_inp.value, userID);
-        msg_inp.value = '';
+    btn_send.addEventListener("click", function(e) {
+        chat.addMessage(inp_msg.value, userID);
+        inp_msg.value = '';
     });
 
-    msg_inp.addEventListener("keydown", function(event) {
-        if (event.key === "Enter") {
-            btn_send.click()
-        }
+    inp_msg.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") btn_send.click();
     })
 
     chat.onChange((data) => {
-        render(data, userID);
+        render(box_msg, data, userID);
     });
 </script>
 
