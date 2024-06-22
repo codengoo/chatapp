@@ -1,8 +1,6 @@
 var IS_FIRST_LOAD = true;
 
 export function render(el, msgList, userID) {
-    console.log(msgList);
-
     if (IS_FIRST_LOAD) {
         msgList.forEach(msg => buildContent(el, msg, userID));
         IS_FIRST_LOAD = false;

@@ -1,14 +1,9 @@
 <?php
 
 $from = $_GET["from"];
-$fh = fopen("log.txt", "a+");
-
-$vipUser = ['vip_client', "vip_client2"];
-$vipAgent = 'vip_agent';
-$regularAgent = 'regular_agent';
-
-$fromInternal = $_GET['fromInternal'] == 'true' ? 'internal' : 'external';
 $to = $_GET['to'];
+$fromInternal = $_GET['fromInternal'] == 'true' ? 'internal' : 'external';
+
 $scco = array();
 $connect = array(
     'action' => 'connect',
@@ -19,8 +14,8 @@ $connect = array(
     ),
     'to' => array(
         'type' => $fromInternal,
-        'number' => in_array($from, $vipUser) ? $vipAgent : $regularAgent,
-        'alias' => $from
+        'number' => $to,
+        'alias' => $to
     )
 );
 

@@ -7,19 +7,17 @@ function scrollToBottom() {
     box_msg2.scrollTop = box_msg2.scrollHeight;
 }
 
-function showVideoCall() {
-    btn_expand.classList.remove("d-none");
-    btn_collapse.classList.add("d-none");
-    box_call.classList.remove("d-none");
-}
-
-function hideVideoCall() {
-    btn_expand.classList.add("d-none");
-    btn_collapse.classList.remove("d-none");
-    box_call.classList.add("d-none");
+function inverseOrder() {
+    if (box_call.classList.contains("order-1")) {
+        box_call.classList.add("order-2");
+        box_call.classList.remove("order-1");
+    } else {
+        box_call.classList.add("order-1");
+        box_call.classList.remove("order-2");
+    }
 }
 
 scrollToBottom();
 box_msg2.addEventListener('DOMNodeInserted', scrollToBottom);
-btn_expand.addEventListener('click', hideVideoCall);
-btn_collapse.addEventListener('click', showVideoCall);
+btn_expand.addEventListener('click', inverseOrder);
+btn_collapse.addEventListener('click', inverseOrder);

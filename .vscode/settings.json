@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
-        "Firestore"
+        "addlocalstream",
+        "addremotestream",
+        "Firestore",
+        "mediastate",
+        "signalingstate",
+        "stringee"
     ]
 }
