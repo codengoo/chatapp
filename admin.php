@@ -58,17 +58,20 @@
             </div>
 
             <div class="col d-flex flex-column h-100 col-12 col-xl-6 order-1" id="box_call">
-                <div class="bg-secondary flex-grow-1 mb-3 position-relative">
+                <div class="bg-secondary flex-grow-1 mb-3 position-relative overflow-hidden">
                     <video id="vid_local" autoplay muted playsinline class="w-25 position-absolute top-0 left-0"></video>
                     <video id="vid_remote" autoplay playsinline style="height: 100%; width:100%"></video>
                 </div>
 
                 <form class="form-group mb-2 d-flex gap-3 justify-content-end">
-                    <!-- <button id="btn_call" class="btn btn-success" type="button" title="Gọi thoại">
+                    <button id="btn_call" class="btn btn-success" type="button" title="Gọi thoại">
                         <img src="./assets/images/call.svg" />
-                    </button> -->
+                    </button>
                     <button id="btn_video" class="btn btn-success" type="button" title="Gọi video">
                         <img src="./assets/images/video.svg" />
+                    </button>
+                    <button id="btn_switch" class="btn btn-success" type="button" title="Lật cam">
+                        <img src="./assets/images/switch.svg" />
                     </button>
                     <button id="btn_end" class="btn btn-danger" type="button" title="Kết thúc">
                         <img src="./assets/images/close.svg" />
