@@ -34,8 +34,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <form class="form-group mb-2" onsubmit="return false;">
@@ -58,6 +56,9 @@
                 </div>
 
                 <form class="form-group mb-2 d-flex gap-3 justify-content-end">
+                    <button id="btn_call" class="btn btn-success" type="button" title="Gọi thoại">
+                        <img src="./assets/images/call.svg" />
+                    </button>
                     <button id="btn_video" class="btn btn-success" type="button" title="Gọi video">
                         <img src="./assets/images/video.svg" />
                     </button>

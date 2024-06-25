@@ -122,7 +122,7 @@
     // const clientID = <?php echo "'" . uniqid() . "'"; ?>;
     // const roomID = <?php echo "'" . uniqid() . "'"; ?>;
 
-    const clientID = <?php echo "'" . uniqid() . "'"; ?>;
+    const clientID = "66764ff19fafb";
     const userID = "66764ff19fcfe";
     const roomID = "66764ff19fd02";
 
