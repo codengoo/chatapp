@@ -98,7 +98,8 @@
 
     function addLinkChat(roomID, userID) {
         const link = document.getElementById("link_chat")
-        link.value = window.location.origin + `/viewer.php?userID=${userID}&room=${roomID}`;
+        // link.value = window.location.origin + `/viewer.php?userID=${userID}&room=${roomID}`;
+        link.value = window.location.origin + `/viewer.php`;
     }
 </script>
 

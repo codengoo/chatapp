@@ -93,13 +93,15 @@
         getParameterByName
     } from "./assets/js/utils.js"
 
-    const userID = getParameterByName('userID');
-    const roomID = getParameterByName('room');
+    // const userID = getParameterByName('userID');
+    // const roomID = getParameterByName('room');
+    const userID = "66764ff19fafb";
+    const roomID = "66764ff19fd02";
 
-    if (!userID || !roomID) {
-        alert("Sai đường dẫn");
-        window.location.href = 'https://www.google.com.vn/?hl=vi'
-    }
+    // if (!userID || !roomID) {
+    //     alert("Sai đường dẫn");
+    //     window.location.href = 'https://www.google.com.vn/?hl=vi'
+    // }
 
     const chat = new Chat(roomID)
     const btn_send = document.getElementById("btn_send");
