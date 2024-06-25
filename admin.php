@@ -13,76 +13,13 @@
 
 <body>
     <div class="container bg-light p-2 vh-100 d-flex flex-column ">
-        <h1 class="text-white bg-primary text-center p-3">Admin Chat</h1>
+        <?php
+        include_once("./components/header.php");
+        echo renderHeader("Admin");
+        ?>
+        <?php include_once("./components/address_box.php"); ?>
 
-        <div class="form-group mb-5">
-            <label class="mb-1" for="room">Gửi link này cho người dùng: </label>
-            <div class="d-flex gap-3">
-                <input type="text" class="form-control" id="link_chat" disabled>
-                <button id="btn_copy" class="btn btn-primary" type="button">Copy</button>
-            </div>
-        </div>
-
-        <div class="flex-1 flex-grow-1 overflow-hidden row">
-            <div class="col d-flex flex-column h-100 col-12 col-xl-6 order-1" id="chat_call">
-                <div class="bg-gray mb-3 border border-2 border-dark flex-grow-1 p-3 d-flex flex-column gap-3 position-relative overflow-scroll" id="box_msg">
-                    <div class="position-sticky top-0 left-0" id="coming_msg">
-                        <div class="d-flex bg-dark text-white w-100 p-2 justify-content-between ps-3">
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <div class="ping bg-success"></div>
-                                <p class="m-0 p-2">Client đang gọi</p>
-                            </div>
-                            <div class="d-flex flex-row gap-2 align-items-center">
-                                <button class="btn btn-primary" id="btn_answer">
-                                    <img src="./assets/images/call.svg" />
-                                </button>
-                                <button class="btn btn-danger" id="btn_reject">
-                                    <img src="./assets/images/close.svg" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <form class="form-group mb-2" onsubmit="return false;">
-                    <div class="d-flex gap-3">
-                        <input type="text" class="form-control" id="inp_msg" placeholder="Viết tin nhắn ở đây">
-                        <button id="btn_send" class="btn btn-primary" type="button">
-                            <img src="./assets/images/send.svg" />
-                        </button>
-                        <button id="btn_expand" class="btn btn-warning" type="button">
-                            <img src="./assets/images/expand.svg" />
-                        </button>
-                        <button id="btn_call" class="btn btn-success" type="button" title="Gọi thoại">
-                            <img src="./assets/images/call.svg" />
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col d-flex flex-column h-100 col-12 col-xl-6 order-2" id="box_call">
-                <div class="bg-secondary flex-grow-1 mb-3 position-relative overflow-hidden">
-                    <video id="vid_local" autoplay muted playsinline class="w-25 position-absolute top-0 start-0"></video>
-                    <div id="count_time" class="position-absolute top-0 end-0 bg-primary text-white p-2 fw-bold">00:00:00</div>
-                    <video id="vid_remote" autoplay playsinline style="height: 100%; width:100%"></video>
-                </div>
-
-                <form class="form-group mb-2 d-flex gap-3 justify-content-end">
-                    <button id="btn_video" class="btn btn-success" type="button" title="Gọi video">
-                        <img src="./assets/images/video.svg" />
-                    </button>
-                    <button id="btn_switch" class="btn btn-success" type="button" title="Lật cam">
-                        <img src="./assets/images/switch.svg" />
-                    </button>
-                    <button id="btn_end" class="btn btn-danger" type="button" title="Kết thúc">
-                        <img src="./assets/images/close.svg" />
-                    </button>
-                    <button id="btn_collapse" class="btn btn-warning" type="button">
-                        <img src="./assets/images/collapse.svg" />
-                    </button>
-                </form>
-            </div>
-        </div>
+        <?php include_once("./components/content.php"); ?>
     </div>
 </body>
 
