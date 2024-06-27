@@ -5,3 +5,21 @@
         <button id="btn_copy" class="btn btn-primary" type="button">Copy</button>
     </div>
 </div>
+
+<script>
+    const btn_copy = document.getElementById("btn_copy");
+    const link_chat = document.getElementById("link_chat");
+    
+    btn_copy.addEventListener("click", function() {
+        navigator.clipboard.writeText(link_chat.value)
+        alert("Đã sao chép link")
+    });
+    
+    function addLinkChat(roomID, userID) {
+        const link = document.getElementById("link_chat")
+        // link.value = window.location.origin + `/viewer.php?userID=${userID}&room=${roomID}`;
+        link.value = window.location.origin + `/viewer.php`;
+    }
+    
+    addLinkChat(roomID, clientID)
+</script>
